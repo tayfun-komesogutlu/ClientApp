@@ -1,0 +1,83 @@
+<!-- <div class="demo"> -->
+<div class="container-fluid">
+    <div class="col-md-12">
+        <div class="col-md-2"></div>
+        <!-- Vertical Card -->
+        <kendo-card width="100%">
+            <div class="p-2 mb-1 bg-info text-light" style="text-align: center; font-size: large;">
+                Image : {{targetImage}}
+            </div>
+
+            <!-- <span class="btn btn-default">{{targetImage}}</span> -->
+            <!-- <span class="btn btn-light">Original Image</span>
+                        <span class="btn btn-light">Original Image</span> -->
+            <div class="row">
+                <!-- <img kendoCardMedia src="https://www.telerik.com/kendo-angular-ui-develop/components/layout/card/assets/coffee_second.jpg" /> -->
+                <!-- <img kendoCardMedia src="{{'data:image/jpg';base64,'+imagePath'/}}" /> -->
+                <div class="col-md-6">
+                    <div class="p-1 mb-1 bg-light text-dark" style="text-align: center; font-size: small;">
+                        Original Image
+                    </div>
+                    <!-- <span class="btn btn-light" style="font-size: small;">Original Image</span> -->
+                    <pinch-zoom [auto-zoom-out]="true" [wheel]="true">
+                        <!-- <img kendoCardMedia src="https://www.telerik.com/kendo-angular-ui-develop/components/layout/card/assets/coffee_second.jpg" /> -->
+                        <img kendoCardMedia [src]="'data:image/jpeg;base64,'+ softwareRes" />
+                    </pinch-zoom>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-1 mb-1 bg-light text-dark" style="text-align: center; font-size: small;">
+                        ELA Image
+                    </div>
+                    <!-- <span class="btn btn-light" style="font-size: small;">ELA Image</span> -->
+                    <pinch-zoom [auto-zoom-out]="true" [wheel]="true">
+                        <!-- <img kendoCardMedia src="https://www.telerik.com/kendo-angular-ui-develop/components/layout/card/assets/coffee_second.jpg" /> -->
+                        <img kendoCardMedia [src]="'data:image/jpeg;base64,'+ elaImage" />
+                    </pinch-zoom>
+                </div>
+            </div>
+            <div>
+                <kendo-card-header>
+                    <h1 kendoCardTitle>Error Level Analysis (ELA)
+                        <button kendoButton *ngIf="!dialogOpened" (click)="openEla('dialog')" [icon]="'info'"
+                            [primary]="true" [look]="'flat'"></button>
+                    </h1>
+                </kendo-card-header>
+                <kendo-card-body>
+                    <h1 kendoCardTitle>Software Manipulation Detection
+                        <button kendoButton (click)="openSoft('window')" [icon]="'info'" [primary]="true"
+                            [look]="'flat'"></button>
+                    </h1>
+                    Detected Software :
+                    <span class="btn btn-warning">{{elaRes}}</span>
+
+                    <!-- <p>No software metadata found !</p> -->
+                </kendo-card-body>
+                <kendo-card-actions class="float-right">
+                    <button kendoButton [primary]="true" [look]="'outline'" [icon]="'undo'"
+                        (click)="goBack();">Back</button>
+                </kendo-card-actions>
+                <kendo-dialog title="Error Level Analysis (ELA)" *ngIf="dialogOpened" (close)="closeEla('dialog')"
+                    [minWidth]="250" [width]="450">
+                    <p style="margin: 30px; text-align: center;">ELA analizi ile piksel yoğunluklarının keskin
+                        geçiş
+                        yaptıkları yerlerde manipule edilme olasılığı saptarız</p>
+                </kendo-dialog>
+            </div>
+        </kendo-card>
+
+        <!-- <kendo-window width="400" [minHeight]="125" title="Error Level Analysis (ELA)" *ngIf="windowOpened"
+                (close)="closeEla('window')">
+                <p style="text-align: center;">ELA analizi ile piksel yoğunluklarının keskin geçiş yaptıkları yerlerde
+                    manipule
+                    edilme olasılığı saptarız</p>
+            </kendo-window> -->
+        <kendo-window width="400" [minHeight]="125" title="Software Manipulation Detection" *ngIf="windowOpened"
+            (close)="closeSoft('window')">
+            <p style="text-align: center;">Resim herhangi bir yazılım üzerinde manipule edildi ise (örn.
+                photoshop)
+                yazılım bu resmin metadatasına imzasını bırakır ve bu imzadan hangi yazılımla modifiye edildiği
+                saptanır</p>
+        </kendo-window>
+
+    </div>
+</div>

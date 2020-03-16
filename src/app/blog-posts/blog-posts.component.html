@@ -1,0 +1,169 @@
+<!-- <div id="Inbox" *ngIf="selectedItem === 'Inbox'">
+    <ul class="inboxList">
+        <li>
+            <h6>Monday meeting</h6>
+            <p>Hi Tom, Since Monday I'll be out of office, I'm rescheduling the meeting for Tuesday.</p>
+        </li>
+        <li>
+            <h6>I'm sorry, Tom</h6>
+            <p>Hi Tom, my aunt comes for a visit this Saturday, so I can't come back to St. Pete...</p>
+        </li>
+    </ul>
+</div>
+<div id="Notifications" *ngIf="selectedItem === 'Notifications'">
+    <ul>
+        <li>Monday meeting</li>
+        <li>Regarding org chart changes</li>
+        <li>Meeting with Cliff</li>
+        <li>Global Marketing Meeting</li>
+        <li>Out tonight with collegues?</li>
+    </ul>
+</div>
+<div id="Calendar" *ngIf="selectedItem === 'Calendar'">
+    <ul>
+        <li>
+            <h6>11/5 Monday</h6>
+            <p>Martha Birthday</p>
+        </li>
+        <li>
+            <h6>15/6 Sunday</h6>
+            <p>Job interview for internal position</p>
+        </li>
+    </ul>
+</div>
+<div id="Attachments" *ngIf="selectedItem === 'Attachments'">
+    <ul>
+        <li>Build enterprise apps</li>
+        <li>Fw: Regarding Multiline textbox</li>
+        <li>Away next week</li>
+        <li>Fw: Your Costume is ready</li>
+        <li>Update completed</li>
+    </ul>
+</div>
+<div id="Favourites" *ngIf="selectedItem === 'Favourites'">
+    <ul>
+        <li>70% Discount!</li>
+        <li>90% Discount!</li>
+        <li>One time offer!</li>
+    </ul>
+</div> -->
+
+<!-- <h3>Image Manipulation Analysis</h3> -->
+
+
+<div class="container-fluid">
+<div class="row">
+    <div class="col-lg-8">
+        <kendo-chart [categoryAxis]="{ categories: categories }" >
+            <kendo-chart-title text="(Fraud) Manipulated Data Series"></kendo-chart-title>
+            <kendo-chart-legend position="bottom" orientation="horizontal"></kendo-chart-legend>
+            <kendo-chart-tooltip format="{0}%"></kendo-chart-tooltip>
+            <kendo-chart-series>
+                <kendo-chart-series-item *ngFor="let item of series" type="line" style="smooth" [data]="item.data"
+                    [name]="item.name">
+                </kendo-chart-series-item>
+            </kendo-chart-series>
+            <!-- <kendo-chart-navigator>
+                <kendo-chart-navigator-select [from]="from" [to]="to">
+                </kendo-chart-navigator-select>
+                <kendo-chart-navigator-series>
+                    <kendo-chart-navigator-series-item *ngFor="let cibi of series" type="area" [data]="cibi.data" 
+                        categoryField="number">
+                    </kendo-chart-navigator-series-item>
+                </kendo-chart-navigator-series>
+            </kendo-chart-navigator> -->
+        </kendo-chart>
+    </div>
+    <div class="col-lg-4">
+        <kendo-chart >
+            <kendo-chart-series>
+              <kendo-chart-series-item
+                  type="donut" [data]="data"
+                  categoryField="kind" field="share">
+                <kendo-chart-series-item-labels
+                  [content]="labelContent"
+                  color="#fff" background="none">
+                </kendo-chart-series-item-labels>
+              </kendo-chart-series-item>
+            </kendo-chart-series>
+            <kendo-chart-legend [visible]="false"></kendo-chart-legend>
+          </kendo-chart>
+    </div>
+</div>
+  
+
+   
+   
+<div class="row">
+<kendo-grid [kendoGridBinding]="samplegridData" [sortable]="true" [filterable]="true" [pageSize]="5" [pageable]="true"
+    [groupable]="true">
+
+    <ng-template kendoGridToolbarTemplate>
+        <button kendoGridPDFCommand icon="file-pdf" style="float:right;">Export to PDF</button>
+        <button type="button" kendoGridExcelCommand icon="file-excel" style="float:right;">Export to Excel</button>
+    </ng-template>
+    <kendo-grid-column *ngFor="let col of columns" [field]="col.field"></kendo-grid-column>
+    <kendo-grid-column field="Analysis" title=""  [filterable]="false"> 
+        <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+            <button kendoButton [icon]="'search'" [look]="'outline'" [primary]="true" [routerLink]="['/blogpost/detail/',dataItem.FileNo,dataItem.ImageName]" routerLinkActive="router-link-active" target="_blank">Analysis</button>
+        </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-pdf fileName="FraudData.pdf" paperSize="A4" [scale]="0.8"  [repeatHeaders]="true">
+        <kendo-grid-pdf-margin top="1cm" left="1cm" right="1cm" bottom="1cm"></kendo-grid-pdf-margin>
+    </kendo-grid-pdf>   
+    <kendo-grid-excel fileName="FraudData.xlsx"></kendo-grid-excel>
+    <!-- <kendo-grid field="FileNo" title="File No" ></kendo-grid-column> -->
+    <!-- <kendo-grid-column field="FileNo" title="File No"></kendo-grid-column>
+<kendo-grid-column field="ImageName" title="Image Name"></kendo-grid-column>
+<kendo-grid-column field="Software" title="Software Name"></kendo-grid-column>
+<kendo-grid-column field="CopyMoveSplicingRate" title="Copy-Move-Slicing Rate"></kendo-grid-column>
+<kendo-grid-column field="AnalysisDate" title="Analysis Date"></kendo-grid-column> -->
+</kendo-grid>
+</div>
+
+
+<div class="row">
+<kendo-grid [kendoGridBinding]="blogs" [sortable]="true" [filterable]="true" [pageSize]="5" [pageable]="true">
+
+    <kendo-grid-column field="postId" title="ID"></kendo-grid-column>
+    <kendo-grid-column field="creator" title="Creator"></kendo-grid-column>
+    <kendo-grid-column field="title" title="Title"></kendo-grid-column>
+    <kendo-grid-column field="body" title="Body"></kendo-grid-column>
+    <kendo-grid-column field="dt" title="Date"></kendo-grid-column>
+</kendo-grid>
+</div> 
+
+
+ 
+<div class="row">
+<p *ngIf="!(blogPost$ | async)"><em>Loading...</em></p>
+<p>
+    <a [routerLink]="['/add']" class="btn btn-primary float-right mb-3">New post</a>
+</p>
+
+<table class="table table-sm table-hover" *ngIf="(blogPost$ | async)?.length>0">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Creator</th>
+            <th>Date</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let blogPost of blogs">
+            <td>{{blogPost.postId}}</td>
+            <td><a [routerLink]="['/blogPost/',blogPost.postId]">{{blogPost.title}}</a></td>
+            <td>{{ blogPost.creator}}</td>
+            <td>{{ blogPost.dt | date: "dd.MM.y"}}</td>
+            <td><a [routerLink]="['/blogpost/edit/', blogPost.postId]"
+                    class="btn btn-primary btn-sm float-right">Edit</a></td>
+            <td><a [routerLink]="" (click)="delete(blogPost.postId)"
+                    class="btn btn-danger btn-sm float-right">Delete</a></td>
+        </tr>
+    </tbody>
+</table>            
+</div>
+</div>
